@@ -30,8 +30,49 @@ class Linkedlist
         void insert(int x);
         void del();
         void display();
+        void insert_pos(int x,int p);
+        int len();
+        void del_pos(int p);
 };
 
+void Linkedlist::del_pos(int p)
+{
+    if(head==NULL)
+    cout<<"The list is empty"<<endl;
+    else{
+        Node* t = head;
+        int i=0;
+        while(i<p-2)
+        {
+            t = t->next;
+            i++;
+        }
+        t->next = t->next->next;
+
+    }
+
+}
+
+void Linkedlist::insert_pos(int x,int p)
+{
+    Node* n = new Node(x);
+    if(p==1)
+    {
+        n->next = head;
+        head = n;
+    }
+    else {
+        Node* t =head;
+        int i=0;
+        while(i<p-2)
+        {
+            t = t->next;
+            i++;
+        }
+        n->next = t->next;
+        t->next = n;
+    }
+}
 void Linkedlist::insert(int x)
 {
     Node* n = new Node(x);
@@ -101,6 +142,16 @@ int main()
     list.del();
     list.display();
     list.del();
+    list.display();
+    list.insert(14);
+    list.insert(15);
+    list.insert(16);
+    list.insert(18);
+    list.insert(19);
+    list.insert_pos(17,3);
+    list.display();
+    cout<<endl;
+    list.del_pos(2);
     list.display();
     return 0;
 }
